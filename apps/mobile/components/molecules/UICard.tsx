@@ -47,12 +47,6 @@ export const UICard: React.FC<UICardProps> = React.memo(({ title, description, i
     </View>
   ) : null;
 
-  const CardDescription = description ? (
-    <Text style={styles.description} numberOfLines={2} ellipsizeMode="tail">
-      {description}
-    </Text>
-  ) : null;
-
   return (
     <Animated.View style={[styles.card, animatedStyle]}>
       <Pressable onPress={onPress} onPressIn={handlePressIn} onPressOut={handlePressOut}>
@@ -61,7 +55,6 @@ export const UICard: React.FC<UICardProps> = React.memo(({ title, description, i
           <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
             {title}
           </Text>
-          {CardDescription}
         </View>
       </Pressable>
     </Animated.View>
@@ -70,19 +63,18 @@ export const UICard: React.FC<UICardProps> = React.memo(({ title, description, i
 
 const styles = StyleSheet.create((theme) => ({
   card: {
-    borderRadius: 16,
+    borderRadius: theme.s(16),
     overflow: "hidden",
-    marginVertical: 5,
-    minHeight: 180,
-    width: 180,
-    backgroundColor: "white",
+    marginVertical: theme.s(5),
+    minHeight: theme.s(180),
+    width:  theme.s(180),
     justifyContent: "center",
   },
   image: {
     width: "100%",
-    height: 150, 
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
+    height: theme.s(150), 
+    borderTopLeftRadius: theme.s(16),
+    borderTopRightRadius: theme.s(16),
   },
   imageContainer: {
     justifyContent: "center",
@@ -90,19 +82,13 @@ const styles = StyleSheet.create((theme) => ({
   },
   content: {
     justifyContent: "center",
-    paddingHorizontal: 8,
+    paddingHorizontal: theme.s(8),
   },
   title: {
-    fontSize: 20,
+    fontSize: theme.s(20),
     fontWeight: "bold",
     textAlign: "center",
-    color: "black",
-  },
-  description: {
-    fontSize: 12,
-    color: "gray",
-    textAlign: "center",
-    marginTop: 2,
+    color: theme.colors.background
   },
 }));
 

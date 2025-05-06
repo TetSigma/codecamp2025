@@ -142,7 +142,7 @@ export const UIMultiStepForm = ({ inputs, onSubmit }: MultiStepFormProps) => {
 const styles = StyleSheet.create((theme) => ({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: theme.colors.background,
     paddingBottom: 16,
   },
 }));

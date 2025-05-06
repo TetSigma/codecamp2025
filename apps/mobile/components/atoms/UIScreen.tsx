@@ -33,7 +33,7 @@ const styles  = StyleSheet.create(( theme ) => ({
     container: {
       flex: 1,
       backgroundColor: theme.colors.background,
-      paddingHorizontal: 16,
-      paddingTop: 16
+      paddingHorizontal: theme.s(16),
+      paddingTop: theme.s(16)
     },
 }));

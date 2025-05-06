@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { TextInput, View, Pressable } from "react-native";
-import { StyleSheet } from "react-native-unistyles";
+import { StyleSheet, useUnistyles } from "react-native-unistyles";
 import { UIText } from "../atoms/UIText";
 import Animated, {
   useSharedValue,
@@ -24,6 +24,9 @@ export const UIInput: React.FC<UIInputProps> = ({
   secureTextEntry = false,
 }) => {
   const [focused, setFocused] = useState(false);
+  const { theme } = useUnistyles()
+  
+
 
   const inputRef = useRef<TextInput>(null);
   const labelOffset = useSharedValue(0);
@@ -55,7 +58,7 @@ export const UIInput: React.FC<UIInputProps> = ({
   const labelStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: labelOffset.value }],
     fontSize: labelFontSize.value,
-    color: labelOffset.value === 0 ? 'gray' : 'black',
+    color: labelOffset.value === 0 ? theme.colors.typography : theme.colors.typography,
   }));
 
   const errorStyle = useAnimatedStyle(() => ({
@@ -105,30 +108,32 @@ export const UIInput: React.FC<UIInputProps> = ({
 
 const styles = StyleSheet.create((theme) => ({
   inputContainer: {
-    marginTop: 5,
-    marginBottom: 5,
+    marginTop: theme.s(5),
+    marginBottom: theme.s(5),
     position: 'relative',
   },
   label: {
     position: 'absolute',
-    left: 16,
+    top: theme.s(2),
+    left: theme.s(16),
     zIndex: 1,
+    color: "black"
   },
   inputWrapper: {
-    height: 45,
-    borderRadius: 16,
-    marginTop: 10,
+    height: theme.s(45),
+    borderRadius: theme.s(16),
+    marginTop: theme.s(10),
   },
   input: {
     height: '100%',
-    borderRadius: 16,
-    paddingHorizontal: 16,
-    fontSize: 16,
+    borderRadius: theme.s(14),
+    paddingHorizontal: theme.s(16),
+    fontSize: theme.s(10),
   },
   errorText: {
-    marginTop: 5,
-    left: 16,
-    fontSize: 14,
+    marginTop: theme.s(5),
+    left: theme.s(10),
+    fontSize: theme.s(14),
     color: 'red',
   },
 }));

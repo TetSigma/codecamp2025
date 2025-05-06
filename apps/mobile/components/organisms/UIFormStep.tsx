@@ -5,7 +5,7 @@ import { UICardList } from "./UICardList";
 import z from "zod";
 import { ImageSourcePropType } from "react-native";
 import { View } from "react-native";
-import { UIKeyboardButton } from "../molecules";
+import { UIButton } from "../molecules";
 import { UIKeyboardWrapper } from "../molecules";
 
 type InputConfig = {
@@ -56,7 +56,7 @@ export const UIFormStep = ({
   return (
     <UIKeyboardWrapper
       contentContainerStyle={{ flex: 1, paddingHorizontal: 16 }}
-      button={<UIKeyboardButton title="Next" onPress={handleButtonPress} />}
+      button={<UIButton title="Next" onPress={handleButtonPress} />}
     >
       {shouldDisplayCardList && cardInput ? (
         <UICardList

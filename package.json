@@ -8,6 +8,8 @@
     "apps/*",
     "cloudfn",
     "schemas"
-  ]
+  ],
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
-

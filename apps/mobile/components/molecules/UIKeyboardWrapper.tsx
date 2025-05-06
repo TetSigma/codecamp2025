@@ -25,29 +25,25 @@ export const UIKeyboardWrapper: React.FC<UIKeyboardWrapperProps> = ({
     isKeyboardClosed.value = keyboard.height.value === 0;
 
     return {
-      backgroundColor: "white",
       paddingBottom: withTiming(keyboard.height.value > 0 ? 0 : bottom, {
-        duration: 300,
+        duration: 400,
       }),
       paddingHorizontal: withTiming(keyboard.height.value > 0 ? 0 : 16, {
-        duration: 300,
-      }),
-      borderRadius: withTiming(keyboard.height.value > 0 ? 0 : 16, {
-        duration: 300,
+        duration: 400,
       }),
     };
   });
 
   return (
-    <View style={{ flex: 1, backgroundColor: "white" }}>
+    <View style={{ flex: 1 }}>
       <KeyboardAwareScrollView
-        bottomOffset={75}
+        bottomOffset={74}
         style={contentContainerStyle}
         keyboardShouldPersistTaps="handled"
       >
         {children}
       </KeyboardAwareScrollView>
-      <KeyboardStickyView style={styles.stickyView} offset={{ opened: 14, closed: 0 }}>
+      <KeyboardStickyView style={styles.stickyView} offset={{ opened: 16, closed: 0 }}>
         <Animated.View style={buttonStyle}>
           {button}
         </Animated.View>

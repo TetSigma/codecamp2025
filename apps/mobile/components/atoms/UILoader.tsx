@@ -11,13 +11,13 @@ export const UILoader: React.FC = () => {
 };
 
 
-const  styles = StyleSheet.create(() => ({
+const  styles = StyleSheet.create((theme) => ({
   loaderContainer: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
   loader: {
-    marginTop: 20,
+    marginTop: theme.s(20),
   },
 }));

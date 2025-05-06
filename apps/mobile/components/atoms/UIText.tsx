@@ -20,20 +20,21 @@ export const UIText: React.FC<UITextProps> = ({
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme)=>({
   heading: {
-    fontSize: 24,
+    fontSize: theme.s(24),
     fontWeight: "bold",
+    color: theme.colors.typography
   },
   subheading: {
-    fontSize: 18,
+    fontSize: theme.s(18),
     fontWeight: "600",
   },
   body: {
-    fontSize: 16,
+    fontSize: theme.s(18),
   },
   caption: {
-    fontSize: 12,
+    fontSize: theme.s(18),
     color: "inherit", 
   },
-});
+}));

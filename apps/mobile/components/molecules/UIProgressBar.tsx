@@ -22,16 +22,16 @@ export const UIProgressBar = ({ progress, isLastStep }: UIProgressBarProps) => {
   );
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create((theme)=>({
   progressBackground: {
-    height: 10,
+    height: theme.s(10),
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: theme.colors.background,
     overflow: "hidden",
-    marginBottom: 16,
+    marginBottom: theme.s(16),
   },
   progressBar: {
     height: "100%",
-    backgroundColor: "black",
+    backgroundColor: theme.colors.primary,
   },
-});
+}));
