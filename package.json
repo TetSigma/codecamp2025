@@ -1,0 +1,13 @@
+{
+  "name": "rn-monorepo",
+  "private": true,
+  "devDependencies": {
+    "turbo": "^1.10.0"
+  },
+  "workspaces": [
+    "apps/*",
+    "cloudfn",
+    "schemas"
+  ]
+}
+
