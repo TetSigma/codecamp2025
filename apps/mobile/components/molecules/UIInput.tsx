@@ -117,7 +117,7 @@ const styles = StyleSheet.create((theme) => ({
     top: theme.s(2),
     left: theme.s(16),
     zIndex: 1,
-    color: "black"
+    color: "black",
   },
   inputWrapper: {
     height: theme.s(45),
@@ -128,7 +128,7 @@ const styles = StyleSheet.create((theme) => ({
     height: '100%',
     borderRadius: theme.s(14),
     paddingHorizontal: theme.s(16),
-    fontSize: theme.s(10),
+    fontSize: theme.s(15),
   },
   errorText: {
     marginTop: theme.s(5),

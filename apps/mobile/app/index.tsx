@@ -1,57 +1,65 @@
-import { useState } from 'react';
-import {
-  FlatList,
-  KeyboardAvoidingView,
-  Platform,
-  View,
-} from 'react-native';
-import { UITextToChat } from '../components/molecules/UITextToChat';
-import UIMessageBubble from '../components/molecules/UIMessageBubble';
+import React from "react";
+import { UIScreen } from "../components/atoms/UIScreen";
+import { UIText } from "../components/atoms/UIText";
+import { UIButton } from "../components/molecules/UIButton";
+import { View } from "react-native";
+import { StyleSheet } from "react-native-unistyles";
 
-type Message = {
-  id: string;
-  text: string;
-  fromUser: boolean;
-};
+const WelcomePage = () => {
+  const handleLoginPress = () => {
+  };
 
-export default function HomeScreen() {
-  const [messages, setMessages] = useState<Message[]>([]);
-
-  const handleSend = (text: string) => {
-    const newUserMessage: Message = {
-      id: Date.now().toString(),
-      text,
-      fromUser: true,
-    };
-
-    setMessages((prev) => [...prev, newUserMessage]);
-
-    setTimeout(() => {
-      const aiMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        text: `AI: odpowiedź na "${text}"`,
-        fromUser: false,
-      };
-      setMessages((prev) => [...prev, aiMessage]);
-    }, 500);
+  const handleRegisterPress = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={Platform.OS === 'ios' ? 10 : 0}
-    >
-      <FlatList
-        data={messages}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <UIMessageBubble text={item.text} fromUser={item.fromUser} />
-        )}
-        contentContainerStyle={{ padding: 16 }}
-        style={{ flex: 1 }}
-      />
-      <UITextToChat onSend={handleSend} />
-    </KeyboardAvoidingView>
+    <UIScreen style={styles.container}>
+      <View style={styles.labelContainer}>
+        <UIText variant="heading" style={styles.heading}>
+          Welcome!
+        </UIText>
+
+        <UIText variant="body" style={styles.description}>
+          To continue, please log in or register to create a new account.
+        </UIText>
+      </View>
+      <View style={styles.buttonsContainer}>
+        <UIButton title="Login" onPress={handleLoginPress} style={styles.button} />
+        <UIButton title="Register" onPress={handleRegisterPress} style={styles.button} />
+      </View>
+    </UIScreen>
   );
-}
+};
+
+const styles = StyleSheet.create((theme) => ({
+  container: {
+    flex: 1,
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: theme.s(16),
+  },
+  labelContainer:{
+    justifyContent:'center',
+    textAlign: 'center',
+    alignItems: 'center'
+  },
+  heading: {
+    marginBottom: theme.s(20),
+  },
+  description: {
+    textAlign: "center",
+    marginBottom: theme.s(30),
+    color: theme.colors.mutedText,
+  },
+  buttonsContainer: {
+    width: "100%",
+    flexDirection: "column",
+    gap: theme.s(12), 
+    marginBottom: theme.s(20)
+  },
+  button: {
+    width: "100%",
+  },
+}));
+
+export default WelcomePage;

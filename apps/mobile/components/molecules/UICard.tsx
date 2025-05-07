@@ -88,7 +88,7 @@ const styles = StyleSheet.create((theme) => ({
     fontSize: theme.s(20),
     fontWeight: "bold",
     textAlign: "center",
-    color: theme.colors.background
+    color: theme.colors.primary
   },
 }));
 
