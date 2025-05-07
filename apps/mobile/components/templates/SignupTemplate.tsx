@@ -85,7 +85,7 @@ const inputs = [
 
 
 
-export default function Home() {
+export default function SignupTemplate() {
   return (
     <UIMultiStepForm inputs={inputs} onSubmit={(data) => console.log(data)} />
   );
