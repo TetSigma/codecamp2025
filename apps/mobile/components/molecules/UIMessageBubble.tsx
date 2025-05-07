@@ -21,10 +21,11 @@ export default function UIMessageBubble({ text, fromUser }: Props) {
       <UIText
         style={{
           color: fromUser
-            ? theme.colors.primary
+            ? theme.colors.background
             : theme.colors.typography,
           fontFamily: theme.fonts.regular,
           fontSize: theme.s(14),
+          lineHeight: theme.s(20),
         }}
       >
         {text}
@@ -36,26 +37,22 @@ export default function UIMessageBubble({ text, fromUser }: Props) {
 const styles = (theme: ReturnType<typeof useUnistyles>['theme']) =>
   StyleSheet.create({
     bubble: {
-      paddingVertical: theme.s(10),
-      paddingHorizontal: theme.s(14),
-      borderRadius: theme.borderRadius.xl,
-      marginVertical: theme.s(4),
+      paddingVertical: theme.s(12),
+      paddingHorizontal: theme.s(16),
+      borderRadius: theme.borderRadius.md,
+      marginVertical: theme.s(8),
       maxWidth: '80%',
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 1 },
-      shadowOpacity: 0.05,
-      shadowRadius: 2,
-      elevation: 2,
       borderWidth: 1,
+      borderColor: theme.colors.border,
     },
     user: {
       backgroundColor: theme.colors.primary,
-      borderColor: theme.colors.primary,
       alignSelf: 'flex-end',
+      marginRight: theme.s(16),
     },
     ai: {
       backgroundColor: theme.colors.background,
-      borderColor: theme.colors.border,
       alignSelf: 'flex-start',
+      marginLeft: theme.s(16),
     },
   });

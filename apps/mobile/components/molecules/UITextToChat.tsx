@@ -33,7 +33,7 @@ export const UITextToChat = ({ onSend, disabled = false }: UITextInputProps) => 
         multiline
         editable={!disabled}
         onSubmitEditing={handleSubmit}
-        returnKeyType="default"
+        returnKeyType="send"
         onContentSizeChange={(e) => {
           const height = e.nativeEvent.contentSize.height;
           setInputHeight(Math.min(height, theme.s(140)));
@@ -63,7 +63,7 @@ export const UITextToChat = ({ onSend, disabled = false }: UITextInputProps) => 
           ]}
           disabled={disabled}
         >
-          <Ionicons name="send" size={20} color={theme.colors.primary} />
+          <Ionicons name="send" size={24} color={theme.colors.background} />
         </Pressable>
       </Animated.View>
     </View>
@@ -85,24 +85,26 @@ const styles = (theme: ReturnType<typeof useUnistyles>['theme']) =>
       flex: 1,
       minHeight: theme.s(44),
       maxHeight: theme.s(140),
-      borderRadius: theme.borderRadius.xl,
-      paddingVertical: theme.s(10),
+      borderRadius: theme.borderRadius.lg,
+      paddingVertical: theme.s(12),
       paddingHorizontal: theme.s(16),
       fontSize: theme.s(14),
+      borderWidth: 1,
+      borderColor: theme.colors.border,
     },
     buttonWrapper: {
       justifyContent: 'flex-end',
     },
     button: {
-      width: theme.s(44),
-      height: theme.s(44),
+      width: theme.s(48),
+      height: theme.s(48),
       borderRadius: theme.borderRadius.full,
       backgroundColor: theme.colors.primary,
       alignItems: 'center',
       justifyContent: 'center',
       shadowColor: '#000',
       shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.15,
+      shadowOpacity: 0.1,
       shadowRadius: 4,
       elevation: 4,
     },

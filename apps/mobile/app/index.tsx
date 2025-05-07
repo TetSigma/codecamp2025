@@ -4,12 +4,17 @@ import { UIText } from "../components/atoms/UIText";
 import { UIButton } from "../components/molecules/UIButton";
 import { View } from "react-native";
 import { StyleSheet } from "react-native-unistyles";
+import { useRouter } from 'expo-router';
 
 const WelcomePage = () => {
+  const router = useRouter();
+
   const handleLoginPress = () => {
+    router.push('/dashboard/chat');
   };
 
   const handleRegisterPress = () => {
+    router.push('/dashboard/chat');
   };
 
   return (
