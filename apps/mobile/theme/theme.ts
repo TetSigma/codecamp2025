@@ -25,16 +25,17 @@ export const lightTheme = {
 
 export const darkTheme = {
   colors: {
-    typography: "#ffffff", // White text
-    typographySecondary: "#1A1A1A",
-    background: coolBlack, // Rich cool black background
-    primary: lightWhite, // Light white for primary color in dark theme
-    secondary: "#67E855", // Vibrant green for secondary color
-    mutedText: "#A1A1A1", // Gray for subtitles
-    border: "#28A745", // Green border in dark mode
-    gradient: ["#34C759", "#67E855"], // Green gradient for consistency
-    error: "#E74C3C", // Red for error text or icons
-    errorBackground: "#F8D7DA", // Light red background for error messages
+    typography: "#000000", // ✔️ poprawione
+    onPrimary: "#ffffff",  // ✔️ dodane
+    typographySecondary: "#ffffff",
+    background: lightWhite,
+    primary: coolBlack,
+    secondary: "#67E855",
+    mutedText: "#A1A1A1",
+    border: "#28A745",
+    gradient: ["#34C759", "#67E855"],
+    error: "#E74C3C",
+    errorBackground: "#F8D7DA",
   },
   s,
   borderRadius,
