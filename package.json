@@ -10,6 +10,7 @@
     "schemas"
   ],
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "expo-av": "~15.0.2"
   }
 }

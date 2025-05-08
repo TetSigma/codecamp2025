@@ -53,7 +53,7 @@ export const UIButton: React.FC<UIButtonProps> = ({
 
   return (
     <AnimatedPressable
-      style={[styles.base, style, pressableStyle, animatedPressStyle]}
+      style={[style,styles.base, pressableStyle, animatedPressStyle]}
       onPress={onPress}
       onPressIn={handlePressIn} 
       onPressOut={handlePressOut} 

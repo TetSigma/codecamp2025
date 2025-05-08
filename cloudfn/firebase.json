@@ -1,7 +1,8 @@
 {
   "firestore": {
     "rules": "firestore.rules",
-    "indexes": "firestore.indexes.json"
+    "indexes": "firestore.indexes.json",
+    "port": "PORT"
   },
   "functions": [
     {
@@ -20,7 +21,19 @@
       ]
     }
   ],
-  "emulators": {
-    "singleProjectMode": true
-  }
+    "emulators": {
+      "firestore": {
+        "host": "localhost",
+        "port": 8105
+      },
+      "auth": {
+        "host": "localhost",
+        "port": 9099
+      },
+      "functions": {
+        "host": "localhost",
+        "port": 5001
+      }
+    }
+  
 }

@@ -1,19 +1,67 @@
-/**
- * Import function triggers from their respective submodules:
- *
- * import {onCall} from "firebase-functions/v2/https";
- * import {onDocumentWritten} from "firebase-functions/v2/firestore";
- *
- * See a full list of supported triggers at https://firebase.google.com/docs/functions
- */
+import * as admin from 'firebase-admin';
+import { signup, login, createNote, getUserNotes, getUserTests, createTest, getTestById } from './endpoints';
+admin.initializeApp();
 
-import {onRequest} from "firebase-functions/v2/https";
-import * as logger from "firebase-functions/logger";
+const db = admin.firestore();
 
-// Start writing functions
-// https://firebase.google.com/docs/functions/typescript
+const testUser = {
+  name: "Jan",
+  surname: "Kowalski",
+  email: "jan.kowalski@test.com",
+  educationLevel: "High School",
+};
 
-// export const helloWorld = onRequest((request, response) => {
-//   logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+const noteAboutPolishRevolution = {
+  title: "Polish Revolution",
+  content: `The Polish Revolution refers to a series of uprisings and protests that occurred 
+  throughout Polish history. One of the most notable was the 1794 Kościuszko Uprising, which 
+  was a military rebellion against the Russian Empire's influence in Poland.`,
+  authorId: "",
+};
+
+const mockTestAboutPolishRevolution = {
+  title: "Polish Revolution Mock Test",
+  questions: [
+    {
+      question: "When did the Kościuszko Uprising occur?",
+      options: ["1794", "1863", "1905", "1918"],
+      correctAnswer: "1794",
+    },
+    {
+      question: "Who was the leader of the 1794 Kościuszko Uprising?",
+      options: ["Tadeusz Kościuszko", "Józef Piłsudski", "Lech Wałęsa", "Andrzej Duda"],
+      correctAnswer: "Tadeusz Kościuszko",
+    },
+  ],
+  authorId: "", // Placeholder, will be replaced with the user ID
+};
+
+// Function to populate the database
+const populateDatabase = async () => {
+  try {
+    // 1. Add a new user to the "users" collection
+    const userRef = await db.collection('users').add(testUser);
+    const userId = userRef.id;
+    console.log("Test user created with ID:", userId);
+
+    // 2. Add a note about the Polish Revolution for the test user
+    noteAboutPolishRevolution.authorId = userId;
+    const noteRef = await db.collection('notes').add(noteAboutPolishRevolution);
+    console.log("Polish Revolution note added with ID:", noteRef.id);
+
+    // 3. Add a mock test about the Polish Revolution for the test user
+    mockTestAboutPolishRevolution.authorId = userId;
+    const mockTestRef = await db.collection('mockTests').add(mockTestAboutPolishRevolution);
+    console.log("Polish Revolution mock test added with ID:", mockTestRef.id);
+
+    console.log("Database population completed successfully!");
+  } catch (error) {
+    console.error("Error populating the database:", error);
+  }
+};
+
+// Run the population script
+populateDatabase();
+
+
+export {signup, login, createNote, getUserNotes, getUserTests, createTest, getTestById}

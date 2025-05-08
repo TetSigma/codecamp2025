@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useRouter } from 'expo-router';
 import {
   TouchableOpacity,
@@ -9,70 +10,63 @@ import {
   TextInput,
   ActivityIndicator,
 } from 'react-native';
-import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useUserStore } from "../../../stores";
+import { useUserStore } from "../../../stores"; // Adjust the import if needed
 
 const colorList = [
   '#B98D50', '#E2CA95', '#AFAC82', '#49493C', '#272624',
   '#0F7267', '#EEEDD0', '#EFB452', '#F09824', '#DD1F38', '#A2CF98',
 ];
 
-interface Note {
+interface Test {
   id: string;
   title: string;
-  content: string;
+  questions: string[];
   userId: string;
 }
 
-export default function NotesIndex() {
+export default function TestsIndex() {
   const [search, setSearch] = useState('');
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [tests, setTests] = useState<Test[]>([]);
   const [loading, setLoading] = useState(true);
-  const user = useUserStore((state) => state.user); 
+  const user = useUserStore((state) => state.user);
   const router = useRouter();
 
   useEffect(() => {
-    const fetchNotes = async () => {
+    const fetchTests = async () => {
       if (!user?.user.uid) return;
       try {
         const response = await axios.post(
-          'http://10.0.2.2:5001/codecamp2025/us-central1/getUserNotes',
+          'http://10.0.2.2:5001/codecamp2025/us-central1/getUserTests',
           { userId: user.user.uid }
         );
-        setNotes(response.data.notes);
+        setTests(response.data.tests);
       } catch (error: any) {
-        console.error('Error fetching notes:', error?.response?.data || error.message);
-        alert('Could not fetch notes.');
+        console.error('Error fetching tests:', error?.response?.data || error.message);
+        alert('Could not fetch tests.');
       } finally {
         setLoading(false);
       }
     };
 
     if (user) {
-      fetchNotes();
+      fetchTests();
     }
   }, [user]);
 
-  const filteredNotes = notes.filter((note) =>
-    note.title.toLowerCase().includes(search.toLowerCase()) ||
-    note.content.toLowerCase().includes(search.toLowerCase())
+  const filteredTests = tests.filter((test) =>
+    test.title.toLowerCase().includes(search.toLowerCase())
   );
 
-  const getTextPreview = (content: string) => {
-    const paragraphs = content
-      .split('\n')
-      .filter((p) => p.trim() !== '')
-      .slice(0, 3);
-    return paragraphs.join(' ').trim();
+  const getTextPreview = (questions: string[]) => {
+    return questions.slice(0, 3).join(', ').trim(); // Preview the first 3 questions
   };
-
   return (
     <SafeAreaView style={styles.SafeArea}>
       <View style={styles.searchContainer}>
         <TextInput
           style={styles.searchInput}
-          placeholder="Szukaj notatek..."
+          placeholder="Szukaj testów..."
           value={search}
           onChangeText={setSearch}
         />
@@ -82,20 +76,18 @@ export default function NotesIndex() {
         <ActivityIndicator size="large" color="#000" style={{ marginTop: 20 }} />
       ) : (
         <ScrollView contentContainerStyle={styles.scrollContainer}>
-          {filteredNotes.map((note, index) => (
+          {filteredTests.map((test, index) => (
             <TouchableOpacity
-              key={note.id}
+              key={test.id}
               onPress={() => router.push({
-                pathname: `/dashboard/notes/${note.id}`,
+                pathname: `/dashboard/tests/${test.id}`,
                 params: {
-                  title: note.title,
-                  content: note.content,
+                  id: test.id
                 }
               })}
             >
-              <View style={[styles.noteCard, { backgroundColor: colorList[index % colorList.length] }]}>
-                <Text style={styles.noteTitle}>{note.title}</Text>
-                <Text style={styles.noteContent}>{getTextPreview(note.content)}</Text>
+              <View style={[styles.testCard, { backgroundColor: colorList[index % colorList.length] }]}>
+                <Text style={styles.testTitle}>{test.title}</Text>
               </View>
             </TouchableOpacity>
           ))}
@@ -124,20 +116,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 20,
   },
-  noteCard: {
+  testCard: {
     borderRadius: 10,
     padding: 15,
     marginVertical: 8,
     minHeight: 120,
     justifyContent: 'center',
   },
-  noteTitle: {
+  testTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#fff',
     marginBottom: 4,
   },
-  noteContent: {
+  testContent: {
     fontSize: 15,
     color: '#ffffffcc',
     lineHeight: 20,

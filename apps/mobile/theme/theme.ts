@@ -10,6 +10,7 @@ export const lightTheme = {
     typography: "#00000", // Black text
     typographySecondary: "#ffffff",
     background: lightWhite, // Light white background
+    cramly:"FF9F00",
     primary: coolBlack, // Primary color (cool black for light theme)
     secondary: "#67E855", // Vibrant green for secondary color
     mutedText: "#A1A1A1", // Gray for subtitles
@@ -27,6 +28,7 @@ export const darkTheme = {
   colors: {
     typography: "#ffffff", // White text
     typographySecondary: "#1A1A1A",
+    cramly:"FF9F00",
     background: coolBlack, // Rich cool black background
     primary: lightWhite, // Light white for primary color in dark theme
     secondary: "#67E855", // Vibrant green for secondary color

@@ -4,3 +4,5 @@ export * from "./UIKeyboardWrapper";
 export * from "./UIButton";
 export * from "./UICard";
 export * from "../organisms/UICardList";
+export * from "./UITextToChat";
+export * from "./UITabBarContainer"
